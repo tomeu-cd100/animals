@@ -3,237 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>El Repte del Pop 🐙</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐙</text></svg>">
+<title>El Repte dels Animals 🐙🦒</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;height:100%;overflow-x:hidden}
 body{
   background:linear-gradient(180deg,#060e1f 0%,#0a1a35 40%,#0d2847 100%);
-  color:#e0f0ff;
-  font-family:'Nunito','Segoe UI',sans-serif;
-  min-height:100vh;
-  min-height:100dvh;
-  position:relative;
+  color:#e0f0ff;font-family:'Nunito','Segoe UI',sans-serif;
+  min-height:100vh;min-height:100dvh;position:relative;
 }
-
-/* Bubbles */
 .bubbles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.bubble{
-  position:absolute;
-  border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,rgba(100,220,255,.12),rgba(50,150,255,.04));
-  border:1px solid rgba(100,200,255,.06);
-  animation:rise linear infinite;
-}
+.bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(100,220,255,.12),rgba(50,150,255,.04));border:1px solid rgba(100,200,255,.06);animation:rise linear infinite}
 @keyframes rise{0%{transform:translateY(100vh) scale(.5);opacity:.6}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
-
-/* Screens */
-.screen{
-  display:none;flex-direction:column;align-items:center;
-  padding:24px 16px;position:relative;z-index:1;
-  animation:fadeIn .6s ease-out;
-}
+.screen{display:none;flex-direction:column;align-items:center;padding:24px 16px;position:relative;z-index:1;animation:fadeIn .6s ease-out}
 .screen.active{display:flex}
-
 @keyframes fadeIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes countdownPop{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes scoreReveal{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
-
-/* Typography */
-h1{
-  font-family:'Fredoka',sans-serif;font-size:clamp(28px,6vw,48px);font-weight:700;
-  background:linear-gradient(135deg,#00e5ff,#00b4d8,#ff8844);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:8px;
-}
-h2{
-  font-family:'Fredoka',sans-serif;font-size:clamp(20px,4vw,28px);font-weight:700;
-  color:#5cc8e6;margin-bottom:8px;
-}
+h1{font-family:'Fredoka',sans-serif;font-size:clamp(28px,6vw,48px);font-weight:700;background:linear-gradient(135deg,#00e5ff,#00b4d8,#ff8844);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+h2{font-family:'Fredoka',sans-serif;font-size:clamp(20px,4vw,28px);font-weight:700;color:#5cc8e6;margin-bottom:8px}
 .subtitle{font-size:clamp(14px,2.8vw,18px);color:#8bb8d8;max-width:500px;line-height:1.6;text-align:center;margin-bottom:28px}
-
-/* Buttons */
-.btn{
-  border:none;border-radius:14px;font-family:'Fredoka',sans-serif;
-  font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;
-  align-items:center;gap:8px;justify-content:center;
-}
+.btn{border:none;border-radius:14px;font-family:'Fredoka',sans-serif;font-weight:700;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
 .btn:active{transform:translateY(0)!important}
-.btn-primary{
-  background:linear-gradient(135deg,#00b4d8,#0077b6);color:#fff;
-  padding:14px 32px;font-size:17px;
-  box-shadow:0 4px 20px rgba(0,180,216,.3);
-}
+.btn-primary{background:linear-gradient(135deg,#00b4d8,#0077b6);color:#fff;padding:14px 32px;font-size:17px;box-shadow:0 4px 20px rgba(0,180,216,.3)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,180,216,.45)}
-.btn-danger{
-  background:linear-gradient(135deg,#ff6b35,#e63946);color:#fff;
-  padding:14px 32px;font-size:17px;
-  box-shadow:0 4px 20px rgba(230,57,70,.3);
-}
+.btn-danger{background:linear-gradient(135deg,#ff6b35,#e63946);color:#fff;padding:14px 32px;font-size:17px;box-shadow:0 4px 20px rgba(230,57,70,.3)}
 .btn-danger:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(230,57,70,.45)}
-.btn-secondary{
-  background:rgba(255,255,255,.08);color:#b0d8f0;
-  border:1.5px solid rgba(255,255,255,.15);
-  padding:10px 24px;font-size:15px;font-weight:600;
-}
+.btn-secondary{background:rgba(255,255,255,.08);color:#b0d8f0;border:1.5px solid rgba(255,255,255,.15);padding:10px 24px;font-size:15px;font-weight:600}
 .btn-secondary:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25)}
 .btn-sm{padding:8px 16px;font-size:13px;border-radius:10px}
-
-/* Info box */
-.info-box{
-  background:rgba(0,180,216,.08);border-radius:16px;
-  padding:20px 28px;margin-bottom:28px;max-width:440px;width:100%;
-  border:1px solid rgba(0,180,216,.15);
-}
+.info-box{background:rgba(0,180,216,.08);border-radius:16px;padding:20px 28px;margin-bottom:28px;max-width:440px;width:100%;border:1px solid rgba(0,180,216,.15)}
 .info-box h3{margin:0 0 12px;font-weight:700;color:#5cc8e6;font-family:'Fredoka',sans-serif;font-size:16px}
 .info-box .steps{text-align:left;font-size:14px;color:#9ac4de;line-height:2}
 .info-box .steps strong{color:#c0dff0}
-
-/* Canvas container */
-.cam-wrap{
-  position:relative;border-radius:16px;overflow:hidden;
-  box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 60px rgba(0,180,216,.1);
-  border:2px solid rgba(0,180,216,.2);
-  max-width:860px;width:100%;margin-bottom:16px;
-}
+.cam-wrap{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 60px rgba(0,180,216,.1);border:2px solid rgba(0,180,216,.2);max-width:860px;width:100%;margin-bottom:16px}
 .cam-wrap canvas{display:block;width:100%;height:auto}
-
-/* Countdown overlay */
-.countdown-overlay{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.55);z-index:2;
-}
-.countdown-number{
-  font-size:min(30vw,140px);font-family:'Fredoka',sans-serif;font-weight:700;
-  color:#00e5ff;text-shadow:0 0 50px rgba(0,229,255,.5);
-  animation:countdownPop .7s ease-out;
-}
-
-/* Controls row */
+.countdown-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:2}
+.countdown-number{font-size:min(30vw,140px);font-family:'Fredoka',sans-serif;font-weight:700;color:#00e5ff;text-shadow:0 0 50px rgba(0,229,255,.5);animation:countdownPop .7s ease-out}
 .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
 .controls-sm{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
-
-/* Sensitivity */
 .sens-row{display:flex;align-items:center;gap:6px}
 .sens-row label{font-size:12px;color:#7aafca}
 .sens-row input[type=range]{width:100px;accent-color:#00b4d8}
 .sens-block{text-align:center;margin-bottom:18px}
 .sens-block label{font-size:13px;color:#7aafca;display:block;margin-bottom:6px}
 .sens-block input[type=range]{width:200px;accent-color:#00b4d8}
-
-/* Best score badge */
-.best-badge{
-  background:rgba(255,209,102,.12);color:#ffd166;
-  padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;
-  border:1px solid rgba(255,209,102,.18);
-}
-
-/* Result screen */
+.best-badge{background:rgba(255,209,102,.12);color:#ffd166;padding:4px 12px;border-radius:20px;font-size:13px;font-weight:700;border:1px solid rgba(255,209,102,.18)}
 .result-emoji{font-size:52px;margin-bottom:4px;animation:float 2.5s ease-in-out infinite}
-.result-title{
-  font-family:'Fredoka',sans-serif;font-size:clamp(22px,5vw,32px);font-weight:700;
-  background:linear-gradient(135deg,#00e5ff,#ff8844);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;margin-bottom:6px;
-}
+.result-title{font-family:'Fredoka',sans-serif;font-size:clamp(22px,5vw,32px);font-weight:700;background:linear-gradient(135deg,#00e5ff,#ff8844);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
 .stars{margin-bottom:14px}
 .stars span{font-size:28px;margin:0 2px;display:inline-block}
 .stars .off{opacity:.18}
-
-.score-card{
-  background:rgba(0,180,216,.08);border-radius:20px;padding:22px 32px;
-  text-align:center;max-width:400px;width:100%;
-  border:1px solid rgba(0,180,216,.15);margin-bottom:22px;
-  animation:scoreReveal .8s ease-out;
-}
-.score-num{
-  font-family:'Fredoka',sans-serif;font-size:clamp(48px,12vw,64px);font-weight:700;line-height:1;
-}
+.score-card{background:rgba(0,180,216,.08);border-radius:20px;padding:22px 32px;text-align:center;max-width:400px;width:100%;border:1px solid rgba(0,180,216,.15);margin-bottom:22px;animation:scoreReveal .8s ease-out}
+.score-num{font-family:'Fredoka',sans-serif;font-size:clamp(48px,12vw,64px);font-weight:700;line-height:1}
 .score-label{font-size:13px;color:#7aafca;margin:4px 0 14px}
 .score-bar{width:100%;height:28px;background:rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
-.score-fill{
-  height:100%;border-radius:14px;
-  background:linear-gradient(90deg,#e63946,#ff6b35,#ffd166,#06d6a0,#00b4d8);
-  background-size:200% 100%;animation:shimmer 3s linear infinite;
-  transition:width 1.4s cubic-bezier(.22,1,.36,1);
-  width:0;
-}
-.score-msg{
-  margin:14px 0 0;font-size:16px;color:#b0d8f0;font-weight:600;
-  font-family:'Fredoka',sans-serif;
-}
-
-/* Comparison images */
+.score-fill{height:100%;border-radius:14px;background:linear-gradient(90deg,#e63946,#ff6b35,#ffd166,#06d6a0,#00b4d8);background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width 1.4s cubic-bezier(.22,1,.36,1);width:0}
+.score-msg{margin:14px 0 0;font-size:16px;color:#b0d8f0;font-weight:600;font-family:'Fredoka',sans-serif}
 .compare{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
 .compare-item{text-align:center}
 .compare-label{font-size:12px;color:#7aafca;margin-bottom:6px;font-weight:700;letter-spacing:.5px}
-.compare-frame{
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
-}
+.compare-frame{border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .compare-frame.user{border:2px solid rgba(0,229,255,.2)}
 .compare-frame.target{border:2px solid rgba(255,136,68,.2)}
 .compare-frame img,.compare-frame canvas{display:block;width:260px;height:auto}
 
-/* Warning bar */
-.warn-bar{
-  background:rgba(255,209,102,.1);color:#ffd166;border:1px solid rgba(255,209,102,.18);
-  border-radius:10px;padding:10px 18px;font-size:14px;text-align:center;
-  max-width:500px;width:100%;margin-bottom:18px;
-}
+/* Animal selection */
+.animal-grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-bottom:32px}
+.animal-card{background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);border-radius:20px;padding:28px 32px;text-align:center;cursor:pointer;transition:all .3s ease;width:200px}
+.animal-card:hover{transform:translateY(-6px);border-color:rgba(0,180,216,.45);background:rgba(0,180,216,.1);box-shadow:0 8px 30px rgba(0,180,216,.2)}
+.animal-card .emoji{font-size:64px;display:block;margin-bottom:12px;transition:transform .3s}
+.animal-card:hover .emoji{transform:scale(1.15)}
+.animal-card .name{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:700;color:#e0f0ff}
 
-/* Responsive */
 @media(max-width:480px){
   .screen{padding:16px 10px}
   .compare-frame img,.compare-frame canvas{width:min(44vw,220px)}
   .btn-primary,.btn-danger{padding:12px 22px;font-size:15px}
+  .animal-card{width:150px;padding:20px}
+  .animal-card .emoji{font-size:48px}
 }
 </style>
 </head>
 <body>
 
-<!-- Bubbles -->
 <div class="bubbles" id="bubbles"></div>
-
-<!-- Hidden video & processing canvas -->
 <video id="video" playsinline muted style="display:none"></video>
 <canvas id="processCanvas" width="160" height="120" style="display:none"></canvas>
 
-<!-- ============ WELCOME ============ -->
+<!-- WELCOME -->
 <div id="screenWelcome" class="screen active" style="justify-content:center;min-height:100vh;min-height:100dvh">
-  <div style="font-size:80px;margin-bottom:8px;animation:float 3s ease-in-out infinite">🐙</div>
-  <h1>El Repte del Pop</h1>
-  <p class="subtitle">
-    Poseu-vos davant la càmera i intenteu formar la silueta d'un pop amb el vostre cos!
-    Com més us hi assembleu, més puntuació obtindreu.
-  </p>
+  <div style="font-size:80px;margin-bottom:8px;animation:float 3s ease-in-out infinite">🎭</div>
+  <h1>El Repte dels Animals</h1>
+  <p class="subtitle">Poseu-vos davant la càmera i intenteu formar la silueta d'un animal amb el vostre cos! Com més us hi assembleu, més puntuació obtindreu.</p>
   <div class="info-box">
     <h3>📋 Com funciona?</h3>
     <div class="steps">
-      <div>📸 <strong>Pas 1:</strong> Captureu el fons buit (sense ningú)</div>
-      <div>🐙 <strong>Pas 2:</strong> Intenteu formar la figura del pop</div>
-      <div>📊 <strong>Pas 3:</strong> Feu la foto i comproveu la similitud!</div>
+      <div>🎯 <strong>Pas 1:</strong> Trieu l'animal que voleu imitar</div>
+      <div>📸 <strong>Pas 2:</strong> Captureu el fons buit (sense ningú)</div>
+      <div>🤸 <strong>Pas 3:</strong> Formeu la figura i feu la foto!</div>
     </div>
   </div>
   <button class="btn btn-primary" style="font-size:19px;padding:16px 42px" onclick="startCamera()">🎬 Començar!</button>
   <p id="errorMsg" style="color:#ff6b6b;margin-top:14px;font-size:14px;display:none"></p>
 </div>
 
-<!-- ============ CALIBRATE ============ -->
+<!-- CHOOSE ANIMAL -->
+<div id="screenChoose" class="screen">
+  <h2>🎯 Trieu un animal!</h2>
+  <p class="subtitle" style="margin-bottom:24px">Quin animal voleu intentar formar?</p>
+  <div class="animal-grid">
+    <div class="animal-card" onclick="selectAnimal('octopus')">
+      <span class="emoji">🐙</span>
+      <span class="name">Pop</span>
+    </div>
+    <div class="animal-card" onclick="selectAnimal('giraffe')">
+      <span class="emoji">🦒</span>
+      <span class="name">Girafa</span>
+    </div>
+  </div>
+</div>
+
+<!-- CALIBRATE -->
 <div id="screenCalibrate" class="screen">
   <h2>📸 Calibratge del fons</h2>
-  <p class="subtitle" style="margin-bottom:16px">
-    Assegureu-vos que <strong style="color:#ffd166">no hi hagi ningú</strong> davant la càmera.<br>
-    Premeu el botó quan el fons estigui buit.
-  </p>
-  <div class="cam-wrap" style="max-width:860px">
-    <canvas id="calCanvas" width="640" height="480"></canvas>
-  </div>
+  <p class="subtitle" style="margin-bottom:16px">Assegureu-vos que <strong style="color:#ffd166">no hi hagi ningú</strong> davant la càmera. Premeu el botó quan el fons estigui buit.</p>
+  <div class="cam-wrap"><canvas id="calCanvas" width="640" height="480"></canvas></div>
   <div class="sens-block">
     <label>Sensibilitat: <span id="sensValCal">32</span></label>
     <input type="range" min="15" max="70" value="32" oninput="threshold=+this.value;document.getElementById('sensValCal').textContent=this.value;document.getElementById('sensRange').value=this.value">
@@ -241,13 +141,13 @@ h2{
   <button class="btn btn-primary" onclick="captureBackground()">✅ Capturar fons</button>
 </div>
 
-<!-- ============ PLAY ============ -->
+<!-- PLAY -->
 <div id="screenPlay" class="screen">
   <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:10px">
-    <h2 style="margin:0">🐙 Formeu el pop!</h2>
+    <h2 style="margin:0" id="playTitle">🐙 Formeu el pop!</h2>
     <span class="best-badge" id="bestBadge" style="display:none">Millor: <span id="bestVal">0</span>%</span>
   </div>
-  <div class="cam-wrap" id="playWrap">
+  <div class="cam-wrap">
     <canvas id="playCanvas" width="640" height="480"></canvas>
     <div class="countdown-overlay" id="countdownOverlay" style="display:none">
       <span class="countdown-number" id="countdownNum"></span>
@@ -258,6 +158,7 @@ h2{
   </div>
   <div class="controls-sm">
     <button class="btn btn-secondary btn-sm" onclick="recalibrate()">🔄 Re-calibrar</button>
+    <button class="btn btn-secondary btn-sm" onclick="changeAnimal()">🔀 Canviar animal</button>
     <div class="sens-row">
       <label>Sensibilitat:</label>
       <input id="sensRange" type="range" min="15" max="70" value="32" oninput="threshold=+this.value">
@@ -265,14 +166,14 @@ h2{
   </div>
 </div>
 
-<!-- ============ RESULT ============ -->
+<!-- RESULT -->
 <div id="screenResult" class="screen" style="min-height:100vh;min-height:100dvh">
   <div class="result-emoji" id="resultEmoji"></div>
   <div class="result-title">Resultat</div>
   <div class="stars" id="resultStars"></div>
   <div class="score-card">
     <div class="score-num" id="scoreNum">0%</div>
-    <div class="score-label">Similitud amb el pop</div>
+    <div class="score-label" id="scoreLabel">Similitud</div>
     <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
     <div class="score-msg" id="scoreMsg"></div>
   </div>
@@ -282,418 +183,279 @@ h2{
       <div class="compare-frame user"><img id="capturedImg" src="" alt="Silueta"></div>
     </div>
     <div class="compare-item">
-      <div class="compare-label">OBJECTIU: POP 🐙</div>
+      <div class="compare-label" id="targetLabel">OBJECTIU</div>
       <div class="compare-frame target"><canvas id="refCanvas" width="260" height="195"></canvas></div>
     </div>
   </div>
   <div class="controls">
     <button class="btn btn-primary" onclick="tryAgain()">🔄 Tornar-ho a provar</button>
+    <button class="btn btn-secondary" onclick="changeAnimal()">🔀 Canviar animal</button>
     <button class="btn btn-secondary" onclick="goHome()">🏠 Inici</button>
   </div>
 </div>
 
 <script>
-// ——— Constants ———
-const CAM_W = 640, CAM_H = 480, MASK_W = 160, MASK_H = 120;
+const CAM_W=640,CAM_H=480,MASK_W=160,MASK_H=120;
+let stream=null,bgData=null,animId=null,threshold=32,bestScore=0;
+let silhouetteMask=null,animalMask=null,currentAnimal='octopus';
 
-// ——— State ———
-let stream = null, bgData = null, animId = null;
-let threshold = 32, showGuide = false, bestScore = 0;
-let silhouetteMask = null, octopusMask = null;
+const ANIMALS={
+  octopus:{emoji:'🐙',article:'el',name:'pop',Name:'Pop',
+    ratings:[
+      {min:80,emoji:'🌟',text:'Increïble! Sou un pop perfecte!'},
+      {min:65,emoji:'🐙',text:'Molt bé! Gairebé un pop de veritat!'},
+      {min:50,emoji:'👏',text:"Bon intent! S'hi assembla força!"},
+      {min:35,emoji:'💪',text:'No està malament! Proveu de nou!'},
+      {min:0, emoji:'🔄',text:'Seguiu provant! Podeu millorar!'}
+    ]},
+  giraffe:{emoji:'🦒',article:'la',name:'girafa',Name:'Girafa',
+    ratings:[
+      {min:80,emoji:'🌟',text:'Increïble! Sou una girafa perfecta!'},
+      {min:65,emoji:'🦒',text:'Molt bé! Gairebé una girafa de veritat!'},
+      {min:50,emoji:'👏',text:"Bon intent! S'hi assembla força!"},
+      {min:35,emoji:'💪',text:'No està malament! Proveu de nou!'},
+      {min:0, emoji:'🔄',text:'Seguiu provant! Podeu millorar!'}
+    ]}
+};
 
-// ——— Elements ———
-const video = document.getElementById('video');
-const processCanvas = document.getElementById('processCanvas');
-const pCtx = processCanvas.getContext('2d', { willReadFrequently: true });
+const video=document.getElementById('video');
+const processCanvas=document.getElementById('processCanvas');
+const pCtx=processCanvas.getContext('2d',{willReadFrequently:true});
 
-// ——— Bubbles ———
-(function initBubbles() {
-  const c = document.getElementById('bubbles');
-  for (let i = 0; i < 14; i++) {
-    const b = document.createElement('div');
-    b.className = 'bubble';
-    const s = 10 + Math.random() * 40;
-    b.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;
-    c.appendChild(b);
-  }
-})();
+// Bubbles
+!function(){const c=document.getElementById('bubbles');for(let i=0;i<14;i++){const b=document.createElement('div');b.className='bubble';const s=10+Math.random()*40;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*8}s`;c.appendChild(b)}}();
 
-// ——— Screen management ———
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+
+// ═══ OCTOPUS ═══
+function drawOctopus(ctx,w,h,color){
+  ctx.fillStyle=color||'#fff';
+  const cx=w/2,headY=h*.28,headRx=w*.22,headRy=h*.22;
+  ctx.beginPath();ctx.ellipse(cx,headY,headRx,headRy,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(cx,headY+headRy*.7,headRx*.85,headRy*.5,0,0,Math.PI);ctx.fill();
+  ctx.beginPath();ctx.ellipse(cx-headRx*.45,headY-headRy*.1,headRx*.18,headRy*.16,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(cx+headRx*.45,headY-headRy*.1,headRx*.18,headRy*.16,0,0,Math.PI*2);ctx.fill();
+  const baseY=headY+headRy*.9,angles=[-1.1,-.75,-.38,-.12,.12,.38,.75,1.1],lengths=[.92,.98,1,.95,.95,1,.98,.92];
+  angles.forEach((a,i)=>{
+    const sx=cx+Math.sin(a)*headRx*.7,tl=h*.52*lengths[i],ex=cx+Math.sin(a)*w*.44,ey=baseY+tl;
+    const c1x=sx+Math.sin(a)*w*.12,c1y=baseY+tl*.35,c2x=ex-Math.sin(a)*w*.05,c2y=baseY+tl*.7;
+    const tk=w*.032,tip=w*.008,wave=Math.sin(a*3)*w*.02;
+    ctx.beginPath();ctx.moveTo(sx-tk,baseY);
+    ctx.bezierCurveTo(c1x-tk+wave,c1y,c2x-tip*2-wave,c2y,ex-tip,ey);
+    ctx.quadraticCurveTo(ex,ey+h*.015,ex+tip,ey);
+    ctx.bezierCurveTo(c2x+tip*2+wave,c2y,c1x+tk-wave,c1y,sx+tk,baseY);
+    ctx.closePath();ctx.fill();
+  });
+}
+function drawOctopusOutline(ctx,w,h){
+  const cx=w/2,headY=h*.28,headRx=w*.22,headRy=h*.22;
+  ctx.beginPath();ctx.ellipse(cx,headY,headRx,headRy,0,0,Math.PI*2);ctx.stroke();
+  const baseY=headY+headRy*.9,angles=[-1.1,-.75,-.38,-.12,.12,.38,.75,1.1],lengths=[.92,.98,1,.95,.95,1,.98,.92];
+  angles.forEach((a,i)=>{
+    const sx=cx+Math.sin(a)*headRx*.7,tl=h*.52*lengths[i],ex=cx+Math.sin(a)*w*.44,ey=baseY+tl;
+    const c1x=sx+Math.sin(a)*w*.12,c1y=baseY+tl*.35,c2x=ex-Math.sin(a)*w*.05,c2y=baseY+tl*.7;
+    ctx.beginPath();ctx.moveTo(sx,baseY);ctx.bezierCurveTo(c1x,c1y,c2x,c2y,ex,ey);ctx.stroke();
+  });
 }
 
-// ——— Octopus drawing ———
-function drawOctopus(ctx, w, h, color) {
-  ctx.fillStyle = color || '#fff';
-  const cx = w / 2, headY = h * 0.28;
-  const headRx = w * 0.22, headRy = h * 0.22;
+// ═══ GIRAFFE ═══
+function rRect(ctx,x,y,w,h,r){
+  r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();ctx.fill();
+}
+function drawGiraffe(ctx,w,h,color){
+  ctx.fillStyle=color||'#fff';
+  const cx=w*.48;
+  // Legs
+  const lw=w*.05,lt=h*.58,lb=h*.95;
+  rRect(ctx,cx-w*.13-lw/2,lt,lw,lb-lt,lw*.3);
+  rRect(ctx,cx-w*.06-lw/2,lt,lw,lb-lt,lw*.3);
+  rRect(ctx,cx+w*.14-lw/2,lt,lw,lb-lt,lw*.3);
+  rRect(ctx,cx+w*.21-lw/2,lt,lw,lb-lt,lw*.3);
+  // Hooves
+  [cx-w*.13,cx-w*.06,cx+w*.14,cx+w*.21].forEach(lx=>{
+    ctx.beginPath();ctx.ellipse(lx,lb,lw*.55,h*.012,0,0,Math.PI*2);ctx.fill();
+  });
+  // Body
+  ctx.beginPath();ctx.ellipse(cx+w*.04,h*.54,w*.22,h*.1,0,0,Math.PI*2);ctx.fill();
+  // Neck
+  ctx.beginPath();ctx.moveTo(cx-w*.08,h*.48);ctx.lineTo(cx-w*.12,h*.12);
+  ctx.lineTo(cx+w*.0,h*.10);ctx.lineTo(cx+w*.02,h*.48);ctx.closePath();ctx.fill();
   // Head
-  ctx.beginPath();
-  ctx.ellipse(cx, headY, headRx, headRy, 0, 0, Math.PI * 2);
-  ctx.fill();
-  // Body join
-  ctx.beginPath();
-  ctx.ellipse(cx, headY + headRy * 0.7, headRx * 0.85, headRy * 0.5, 0, 0, Math.PI);
-  ctx.fill();
-  // Eye bumps
-  ctx.beginPath();
-  ctx.ellipse(cx - headRx * 0.45, headY - headRy * 0.1, headRx * 0.18, headRy * 0.16, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(cx + headRx * 0.45, headY - headRy * 0.1, headRx * 0.18, headRy * 0.16, 0, 0, Math.PI * 2);
-  ctx.fill();
-  // Tentacles
-  const baseY = headY + headRy * 0.9;
-  const angles = [-1.1, -0.75, -0.38, -0.12, 0.12, 0.38, 0.75, 1.1];
-  const lengths = [0.92, 0.98, 1.0, 0.95, 0.95, 1.0, 0.98, 0.92];
-  angles.forEach((a, i) => {
-    const sx = cx + Math.sin(a) * headRx * 0.7;
-    const tl = h * 0.52 * lengths[i];
-    const ex = cx + Math.sin(a) * w * 0.44, ey = baseY + tl;
-    const c1x = sx + Math.sin(a) * w * 0.12, c1y = baseY + tl * 0.35;
-    const c2x = ex - Math.sin(a) * w * 0.05, c2y = baseY + tl * 0.7;
-    const tk = w * 0.032, tip = w * 0.008;
-    const wave = Math.sin(a * 3) * w * 0.02;
-    ctx.beginPath();
-    ctx.moveTo(sx - tk, baseY);
-    ctx.bezierCurveTo(c1x - tk + wave, c1y, c2x - tip * 2 - wave, c2y, ex - tip, ey);
-    ctx.quadraticCurveTo(ex, ey + h * 0.015, ex + tip, ey);
-    ctx.bezierCurveTo(c2x + tip * 2 + wave, c2y, c1x + tk - wave, c1y, sx + tk, baseY);
-    ctx.closePath();
-    ctx.fill();
+  ctx.beginPath();ctx.ellipse(cx-w*.08,h*.09,w*.08,h*.05,-.15,0,Math.PI*2);ctx.fill();
+  // Snout
+  ctx.beginPath();ctx.ellipse(cx-w*.17,h*.085,w*.04,h*.03,0,0,Math.PI*2);ctx.fill();
+  // Ossicones
+  rRect(ctx,cx-w*.1,h*.02,w*.02,h*.055,w*.008);
+  rRect(ctx,cx-w*.04,h*.025,w*.02,h*.05,w*.008);
+  ctx.beginPath();ctx.arc(cx-w*.09,h*.02,w*.015,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(cx-w*.03,h*.025,w*.015,0,Math.PI*2);ctx.fill();
+  // Ear
+  ctx.beginPath();ctx.ellipse(cx+w*.01,h*.065,w*.025,h*.018,.6,0,Math.PI*2);ctx.fill();
+  // Tail
+  ctx.beginPath();ctx.moveTo(cx+w*.25,h*.48);
+  ctx.quadraticCurveTo(cx+w*.32,h*.42,cx+w*.30,h*.36);
+  ctx.lineTo(cx+w*.28,h*.36);
+  ctx.quadraticCurveTo(cx+w*.30,h*.42,cx+w*.24,h*.48);
+  ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.ellipse(cx+w*.29,h*.35,w*.02,h*.02,-.5,0,Math.PI*2);ctx.fill();
+}
+function drawGiraffeOutline(ctx,w,h){
+  const cx=w*.48;
+  ctx.beginPath();ctx.ellipse(cx+w*.04,h*.54,w*.22,h*.1,0,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx-w*.08,h*.48);ctx.lineTo(cx-w*.12,h*.12);
+  ctx.lineTo(cx+w*.0,h*.10);ctx.lineTo(cx+w*.02,h*.48);ctx.closePath();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(cx-w*.08,h*.09,w*.08,h*.05,-.15,0,Math.PI*2);ctx.stroke();
+  ctx.beginPath();ctx.ellipse(cx-w*.17,h*.085,w*.04,h*.03,0,0,Math.PI*2);ctx.stroke();
+  const lt=h*.58,lb=h*.95;
+  [cx-w*.13,cx-w*.06,cx+w*.14,cx+w*.21].forEach(lx=>{
+    ctx.beginPath();ctx.moveTo(lx,lt);ctx.lineTo(lx,lb);ctx.stroke();
   });
 }
 
-function drawOctopusOutline(ctx, w, h) {
-  const cx = w / 2, headY = h * 0.28;
-  const headRx = w * 0.22, headRy = h * 0.22;
-  ctx.beginPath();
-  ctx.ellipse(cx, headY, headRx, headRy, 0, 0, Math.PI * 2);
-  ctx.stroke();
-  const baseY = headY + headRy * 0.9;
-  const angles = [-1.1, -0.75, -0.38, -0.12, 0.12, 0.38, 0.75, 1.1];
-  const lengths = [0.92, 0.98, 1.0, 0.95, 0.95, 1.0, 0.98, 0.92];
-  angles.forEach((a, i) => {
-    const sx = cx + Math.sin(a) * headRx * 0.7;
-    const tl = h * 0.52 * lengths[i];
-    const ex = cx + Math.sin(a) * w * 0.44, ey = baseY + tl;
-    const c1x = sx + Math.sin(a) * w * 0.12, c1y = baseY + tl * 0.35;
-    const c2x = ex - Math.sin(a) * w * 0.05, c2y = baseY + tl * 0.7;
-    ctx.beginPath();
-    ctx.moveTo(sx, baseY);
-    ctx.bezierCurveTo(c1x, c1y, c2x, c2y, ex, ey);
-    ctx.stroke();
-  });
+// ═══ GENERIC ═══
+function getDrawFn(){return currentAnimal==='octopus'?drawOctopus:drawGiraffe}
+function getOutlineFn(){return currentAnimal==='octopus'?drawOctopusOutline:drawGiraffeOutline}
+
+function createAnimalMask(w,h){
+  const off=document.createElement('canvas');off.width=w;off.height=h;
+  const c=off.getContext('2d');c.clearRect(0,0,w,h);getDrawFn()(c,w,h,'#fff');
+  const d=c.getImageData(0,0,w,h),m=new Uint8Array(w*h);
+  for(let i=0;i<w*h;i++)m[i]=d.data[i*4+3]>128?1:0;return m;
+}
+function cleanMask(mask,w,h){
+  const out=new Uint8Array(w*h);
+  for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){let s=0;
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)s+=mask[(y+dy)*w+(x+dx)];
+    out[y*w+x]=s>=5?1:0;}return out;
+}
+function centerOfMass(mask,w,h){
+  let sx=0,sy=0,n=0;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(mask[y*w+x]){sx+=x;sy+=y;n++;}
+  return n>0?{x:sx/n,y:sy/n,n}:{x:w/2,y:h/2,n:0};
+}
+function compareMasks(sM,oM,w,h){
+  const sc=centerOfMass(sM,w,h),oc=centerOfMass(oM,w,h);
+  const dx=Math.round(oc.x-sc.x),dy=Math.round(oc.y-sc.y);
+  let inter=0,union=0;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+    const o=oM[y*w+x],sx2=x-dx,sy2=y-dy;
+    const s=(sx2>=0&&sx2<w&&sy2>=0&&sy2<h)?sM[sy2*w+sx2]:0;
+    if(s&&o)inter++;if(s||o)union++;}
+  return union>0?Math.round(inter/union*100):0;
+}
+function getRating(score){
+  const r=ANIMALS[currentAnimal].ratings;
+  for(const x of r)if(score>=x.min)return{emoji:x.emoji,text:x.text,stars:score>=80?5:score>=65?4:score>=50?3:score>=35?2:1};
+  return{emoji:'🔄',text:'Seguiu provant!',stars:1};
 }
 
-function createOctopusMask(w, h) {
-  const off = document.createElement('canvas');
-  off.width = w; off.height = h;
-  const c = off.getContext('2d');
-  c.clearRect(0, 0, w, h);
-  drawOctopus(c, w, h, '#fff');
-  const d = c.getImageData(0, 0, w, h);
-  const m = new Uint8Array(w * h);
-  for (let i = 0; i < w * h; i++) m[i] = d.data[i * 4 + 3] > 128 ? 1 : 0;
-  return m;
+// ═══ CAMERA & FLOW ═══
+async function startCamera(){
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:CAM_W},height:{ideal:CAM_H},facingMode:'user'},audio:false});
+    video.srcObject=stream;await video.play();
+    showScreen('screenChoose');document.getElementById('errorMsg').style.display='none';
+  }catch(e){const err=document.getElementById('errorMsg');err.textContent="No s'ha pogut accedir a la càmera. Reviseu els permisos.";err.style.display='block';}
 }
+function stopCamera(){if(animId){cancelAnimationFrame(animId);animId=null;}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}}
 
-// ——— Mask helpers ———
-function cleanMask(mask, w, h) {
-  const out = new Uint8Array(w * h);
-  for (let y = 1; y < h - 1; y++)
-    for (let x = 1; x < w - 1; x++) {
-      let s = 0;
-      for (let dy = -1; dy <= 1; dy++)
-        for (let dx = -1; dx <= 1; dx++)
-          s += mask[(y + dy) * w + (x + dx)];
-      out[y * w + x] = s >= 5 ? 1 : 0;
-    }
-  return out;
+function selectAnimal(animal){
+  currentAnimal=animal;const a=ANIMALS[animal];
+  document.getElementById('playTitle').textContent=a.emoji+' Formeu '+a.article+' '+a.name+'!';
+  showScreen('screenCalibrate');startCalibrationPreview();
 }
+function changeAnimal(){if(animId){cancelAnimationFrame(animId);animId=null;}bestScore=0;document.getElementById('bestBadge').style.display='none';showScreen('screenChoose')}
 
-function centerOfMass(mask, w, h) {
-  let sx = 0, sy = 0, n = 0;
-  for (let y = 0; y < h; y++)
-    for (let x = 0; x < w; x++)
-      if (mask[y * w + x]) { sx += x; sy += y; n++; }
-  return n > 0 ? { x: sx / n, y: sy / n, n } : { x: w / 2, y: h / 2, n: 0 };
-}
-
-function compareMasks(sMask, oMask, w, h) {
-  const sc = centerOfMass(sMask, w, h);
-  const oc = centerOfMass(oMask, w, h);
-  const dx = Math.round(oc.x - sc.x), dy = Math.round(oc.y - sc.y);
-  let inter = 0, union = 0;
-  for (let y = 0; y < h; y++)
-    for (let x = 0; x < w; x++) {
-      const o = oMask[y * w + x];
-      const sx = x - dx, sy = y - dy;
-      const s = (sx >= 0 && sx < w && sy >= 0 && sy < h) ? sMask[sy * w + sx] : 0;
-      if (s && o) inter++;
-      if (s || o) union++;
-    }
-  return union > 0 ? Math.round((inter / union) * 100) : 0;
-}
-
-function getRating(score) {
-  if (score >= 80) return { emoji: '🌟', text: 'Increïble! Sou un pop perfecte!', stars: 5 };
-  if (score >= 65) return { emoji: '🐙', text: 'Molt bé! Gairebé un pop de veritat!', stars: 4 };
-  if (score >= 50) return { emoji: '👏', text: 'Bon intent! S\'hi assembla força!', stars: 3 };
-  if (score >= 35) return { emoji: '💪', text: 'No està malament! Proveu de nou!', stars: 2 };
-  return { emoji: '🔄', text: 'Seguiu provant! Podeu millorar!', stars: 1 };
-}
-
-// ——— Camera ———
-async function startCamera() {
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({
-      video: { width: { ideal: CAM_W }, height: { ideal: CAM_H }, facingMode: 'user' },
-      audio: false
-    });
-    video.srcObject = stream;
-    await video.play();
-    showScreen('screenCalibrate');
-    startCalibrationPreview();
-    document.getElementById('errorMsg').style.display = 'none';
-  } catch (e) {
-    const err = document.getElementById('errorMsg');
-    err.textContent = 'No s\'ha pogut accedir a la càmera. Reviseu els permisos.';
-    err.style.display = 'block';
+function startCalibrationPreview(){
+  const canvas=document.getElementById('calCanvas'),ctx=canvas.getContext('2d');
+  if(animId)cancelAnimationFrame(animId);
+  function loop(){
+    ctx.drawImage(video,0,0,CAM_W,CAM_H);
+    ctx.strokeStyle='rgba(0,229,255,.07)';ctx.lineWidth=1;
+    for(let x=0;x<CAM_W;x+=80){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,CAM_H);ctx.stroke();}
+    for(let y=0;y<CAM_H;y+=80){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(CAM_W,y);ctx.stroke();}
+    ctx.strokeStyle='rgba(0,229,255,.15)';
+    ctx.beginPath();ctx.moveTo(CAM_W/2,0);ctx.lineTo(CAM_W/2,CAM_H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,CAM_H/2);ctx.lineTo(CAM_W,CAM_H/2);ctx.stroke();
+    animId=requestAnimationFrame(loop);
   }
+  animId=requestAnimationFrame(loop);
 }
 
-function stopCamera() {
-  if (animId) { cancelAnimationFrame(animId); animId = null; }
-  if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+function captureBackground(){
+  pCtx.drawImage(video,0,0,MASK_W,MASK_H);bgData=pCtx.getImageData(0,0,MASK_W,MASK_H);
+  animalMask=createAnimalMask(MASK_W,MASK_H);showScreen('screenPlay');startPlayLoop();
 }
 
-// ——— Calibration preview ———
-function startCalibrationPreview() {
-  const canvas = document.getElementById('calCanvas');
-  const ctx = canvas.getContext('2d');
-  if (animId) cancelAnimationFrame(animId);
-  function loop() {
-    ctx.drawImage(video, 0, 0, CAM_W, CAM_H);
-    // Grid overlay
-    ctx.strokeStyle = 'rgba(0,229,255,.07)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < CAM_W; x += 80) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, CAM_H); ctx.stroke(); }
-    for (let y = 0; y < CAM_H; y += 80) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(CAM_W, y); ctx.stroke(); }
-    // Center cross
-    ctx.strokeStyle = 'rgba(0,229,255,.15)';
-    ctx.beginPath(); ctx.moveTo(CAM_W / 2, 0); ctx.lineTo(CAM_W / 2, CAM_H); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(0, CAM_H / 2); ctx.lineTo(CAM_W, CAM_H / 2); ctx.stroke();
-    animId = requestAnimationFrame(loop);
+function startPlayLoop(){
+  const canvas=document.getElementById('playCanvas'),dCtx=canvas.getContext('2d');
+  if(animId)cancelAnimationFrame(animId);
+  const scX=CAM_W/MASK_W,scY=CAM_H/MASK_H;
+  function loop(){
+    pCtx.drawImage(video,0,0,MASK_W,MASK_H);
+    const frame=pCtx.getImageData(0,0,MASK_W,MASK_H),raw=new Uint8Array(MASK_W*MASK_H);
+    for(let i=0;i<MASK_W*MASK_H;i++){const idx=i*4;
+      const d=(Math.abs(frame.data[idx]-bgData.data[idx])+Math.abs(frame.data[idx+1]-bgData.data[idx+1])+Math.abs(frame.data[idx+2]-bgData.data[idx+2]))/3;
+      raw[i]=d>threshold?1:0;}
+    const mask=cleanMask(raw,MASK_W,MASK_H);silhouetteMask=mask;
+    dCtx.drawImage(video,0,0,CAM_W,CAM_H);
+    const imgData=dCtx.getImageData(0,0,CAM_W,CAM_H),px=imgData.data;
+    for(let my=0;my<MASK_H;my++)for(let mx=0;mx<MASK_W;mx++){
+      const fg=mask[my*MASK_W+mx],p0=(mx*scX)|0,p1=(my*scY)|0;
+      const ex=Math.min(((mx+1)*scX)|0,CAM_W),ey=Math.min(((my+1)*scY)|0,CAM_H);
+      for(let y=p1;y<ey;y++)for(let x=p0;x<ex;x++){const idx=(y*CAM_W+x)*4;
+        if(fg){px[idx]=Math.min(255,px[idx]*.3);px[idx+1]=Math.min(255,px[idx+1]*.3+200);px[idx+2]=Math.min(255,px[idx+2]*.3+220);}
+        else{px[idx]=px[idx]*.15;px[idx+1]=px[idx+1]*.15;px[idx+2]=px[idx+2]*.2+20;}
+        px[idx+3]=255;}}
+    dCtx.putImageData(imgData,0,0);
+    animId=requestAnimationFrame(loop);
   }
-  animId = requestAnimationFrame(loop);
+  animId=requestAnimationFrame(loop);
 }
 
-// ——— Background capture ———
-function captureBackground() {
-  pCtx.drawImage(video, 0, 0, MASK_W, MASK_H);
-  bgData = pCtx.getImageData(0, 0, MASK_W, MASK_H);
-  octopusMask = createOctopusMask(MASK_W, MASK_H);
-  showScreen('screenPlay');
-  startPlayLoop();
+function capturePhoto(){
+  const btn=document.getElementById('btnCapture');btn.disabled=true;btn.style.animation='none';
+  const overlay=document.getElementById('countdownOverlay'),numEl=document.getElementById('countdownNum');
+  overlay.style.display='flex';let c=3;
+  numEl.textContent=c;numEl.style.animation='none';void numEl.offsetWidth;numEl.style.animation='countdownPop .7s ease-out';
+  const interval=setInterval(()=>{c--;
+    if(c>0){numEl.textContent=c;numEl.style.animation='none';void numEl.offsetWidth;numEl.style.animation='countdownPop .7s ease-out';}
+    else{clearInterval(interval);overlay.style.display='none';btn.disabled=false;btn.style.animation='pulse 2s infinite';
+      const img=document.getElementById('playCanvas').toDataURL('image/png');
+      let score=0;
+      if(silhouetteMask&&animalMask){score=compareMasks(silhouetteMask,animalMask,MASK_W,MASK_H);
+        if(score>bestScore){bestScore=score;document.getElementById('bestVal').textContent=bestScore;document.getElementById('bestBadge').style.display='';}}
+      showResult(score,img);}
+  },1000);
 }
 
-// ——— Play loop ———
-function startPlayLoop() {
-  const canvas = document.getElementById('playCanvas');
-  const dCtx = canvas.getContext('2d');
-  if (animId) cancelAnimationFrame(animId);
-
-  const scaleX = CAM_W / MASK_W, scaleY = CAM_H / MASK_H;
-
-  function loop() {
-    // Background subtraction
-    pCtx.drawImage(video, 0, 0, MASK_W, MASK_H);
-    const frame = pCtx.getImageData(0, 0, MASK_W, MASK_H);
-    const rawMask = new Uint8Array(MASK_W * MASK_H);
-    for (let i = 0; i < MASK_W * MASK_H; i++) {
-      const idx = i * 4;
-      const d = (Math.abs(frame.data[idx] - bgData.data[idx])
-               + Math.abs(frame.data[idx+1] - bgData.data[idx+1])
-               + Math.abs(frame.data[idx+2] - bgData.data[idx+2])) / 3;
-      rawMask[i] = d > threshold ? 1 : 0;
-    }
-    const mask = cleanMask(rawMask, MASK_W, MASK_H);
-    silhouetteMask = mask;
-
-    // Draw video
-    dCtx.drawImage(video, 0, 0, CAM_W, CAM_H);
-    const imgData = dCtx.getImageData(0, 0, CAM_W, CAM_H);
-    const pixels = imgData.data;
-
-    // Apply silhouette coloring
-    for (let my = 0; my < MASK_H; my++) {
-      for (let mx = 0; mx < MASK_W; mx++) {
-        const fg = mask[my * MASK_W + mx];
-        const px = (mx * scaleX) | 0, py = (my * scaleY) | 0;
-        const ex = Math.min(((mx + 1) * scaleX) | 0, CAM_W);
-        const ey = Math.min(((my + 1) * scaleY) | 0, CAM_H);
-        for (let y = py; y < ey; y++) {
-          for (let x = px; x < ex; x++) {
-            const idx = (y * CAM_W + x) * 4;
-            if (fg) {
-              pixels[idx]     = Math.min(255, pixels[idx] * 0.3);
-              pixels[idx + 1] = Math.min(255, pixels[idx + 1] * 0.3 + 200);
-              pixels[idx + 2] = Math.min(255, pixels[idx + 2] * 0.3 + 220);
-            } else {
-              pixels[idx]     = pixels[idx] * 0.15;
-              pixels[idx + 1] = pixels[idx + 1] * 0.15;
-              pixels[idx + 2] = pixels[idx + 2] * 0.2 + 20;
-            }
-            pixels[idx + 3] = 255;
-          }
-        }
-      }
-    }
-    dCtx.putImageData(imgData, 0, 0);
-
-    // Octopus guide overlay
-    if (showGuide) {
-      dCtx.save();
-      dCtx.globalAlpha = 0.2;
-      drawOctopus(dCtx, CAM_W, CAM_H, '#ff8844');
-      dCtx.restore();
-      dCtx.save();
-      dCtx.globalAlpha = 0.5;
-      dCtx.strokeStyle = '#ffaa55';
-      dCtx.lineWidth = 2;
-      drawOctopusOutline(dCtx, CAM_W, CAM_H);
-      dCtx.restore();
-    }
-
-    animId = requestAnimationFrame(loop);
-  }
-  animId = requestAnimationFrame(loop);
-}
-
-// ——— Toggle guide ———
-function toggleGuide() {
-  showGuide = !showGuide;
-  document.getElementById('btnGuide').textContent = showGuide ? '👁️ Amagar guia' : '👁️ Mostrar guia';
-}
-
-// ——— Photo capture with countdown ———
-function capturePhoto() {
-  const btn = document.getElementById('btnCapture');
-  btn.disabled = true;
-  btn.style.animation = 'none';
-
-  const overlay = document.getElementById('countdownOverlay');
-  const numEl = document.getElementById('countdownNum');
-  overlay.style.display = 'flex';
-  let c = 3;
-  numEl.textContent = c;
-  numEl.style.animation = 'none';
-  void numEl.offsetWidth;
-  numEl.style.animation = 'countdownPop .7s ease-out';
-
-  const interval = setInterval(() => {
-    c--;
-    if (c > 0) {
-      numEl.textContent = c;
-      numEl.style.animation = 'none';
-      void numEl.offsetWidth;
-      numEl.style.animation = 'countdownPop .7s ease-out';
-    } else {
-      clearInterval(interval);
-      overlay.style.display = 'none';
-      btn.disabled = false;
-      btn.style.animation = 'pulse 2s infinite';
-
-      // Save captured image
-      const canvas = document.getElementById('playCanvas');
-      const capturedDataURL = canvas.toDataURL('image/png');
-
-      // Compute score
-      let score = 0;
-      if (silhouetteMask && octopusMask) {
-        score = compareMasks(silhouetteMask, octopusMask, MASK_W, MASK_H);
-        if (score > bestScore) {
-          bestScore = score;
-          document.getElementById('bestVal').textContent = bestScore;
-          document.getElementById('bestBadge').style.display = '';
-        }
-      }
-
-      // Show results
-      showResult(score, capturedDataURL);
-    }
-  }, 1000);
-}
-
-// ——— Show result ———
-function showResult(score, imgSrc) {
-  if (animId) { cancelAnimationFrame(animId); animId = null; }
-
-  const rating = getRating(score);
-  document.getElementById('resultEmoji').textContent = rating.emoji;
-
-  // Stars
-  const starsEl = document.getElementById('resultStars');
-  starsEl.innerHTML = '';
-  for (let i = 1; i <= 5; i++) {
-    const s = document.createElement('span');
-    s.textContent = '⭐';
-    if (i > rating.stars) s.className = 'off';
-    starsEl.appendChild(s);
-  }
-
-  // Score
-  const color = score >= 65 ? '#06d6a0' : score >= 40 ? '#ffd166' : '#ff6b6b';
-  document.getElementById('scoreNum').textContent = score + '%';
-  document.getElementById('scoreNum').style.color = color;
-  document.getElementById('scoreMsg').textContent = rating.text;
-
-  // Bar animation
-  const fill = document.getElementById('scoreFill');
-  fill.style.width = '0';
-  requestAnimationFrame(() => requestAnimationFrame(() => fill.style.width = score + '%'));
-
-  // Captured image
-  document.getElementById('capturedImg').src = imgSrc;
-
-  // Reference octopus
-  const refC = document.getElementById('refCanvas');
-  const rCtx = refC.getContext('2d');
-  rCtx.fillStyle = '#0a1628';
-  rCtx.fillRect(0, 0, 260, 195);
-  drawOctopus(rCtx, 260, 195, '#00c8e8');
-  rCtx.strokeStyle = '#00e5ff';
-  rCtx.lineWidth = 1.5;
-  drawOctopusOutline(rCtx, 260, 195);
-
+function showResult(score,imgSrc){
+  if(animId){cancelAnimationFrame(animId);animId=null;}
+  const a=ANIMALS[currentAnimal],rating=getRating(score);
+  document.getElementById('resultEmoji').textContent=rating.emoji;
+  const starsEl=document.getElementById('resultStars');starsEl.innerHTML='';
+  for(let i=1;i<=5;i++){const s=document.createElement('span');s.textContent='⭐';if(i>rating.stars)s.className='off';starsEl.appendChild(s);}
+  const color=score>=65?'#06d6a0':score>=40?'#ffd166':'#ff6b6b';
+  document.getElementById('scoreNum').textContent=score+'%';
+  document.getElementById('scoreNum').style.color=color;
+  document.getElementById('scoreLabel').textContent='Similitud amb '+a.article+' '+a.name;
+  document.getElementById('scoreMsg').textContent=rating.text;
+  document.getElementById('targetLabel').textContent='OBJECTIU: '+a.Name.toUpperCase()+' '+a.emoji;
+  const fill=document.getElementById('scoreFill');fill.style.width='0';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>fill.style.width=score+'%'));
+  document.getElementById('capturedImg').src=imgSrc;
+  const refC=document.getElementById('refCanvas'),rCtx=refC.getContext('2d');
+  rCtx.fillStyle='#0a1628';rCtx.fillRect(0,0,260,195);
+  getDrawFn()(rCtx,260,195,'#00c8e8');rCtx.strokeStyle='#00e5ff';rCtx.lineWidth=1.5;
+  getOutlineFn()(rCtx,260,195);
   showScreen('screenResult');
 }
 
-// ——— Navigation ———
-function tryAgain() {
-  showScreen('screenPlay');
-  startPlayLoop();
-}
-
-function recalibrate() {
-  if (animId) { cancelAnimationFrame(animId); animId = null; }
-  bgData = null;
-  showScreen('screenCalibrate');
-  startCalibrationPreview();
-}
-
-function goHome() {
-  stopCamera();
-  bestScore = 0;
-  bgData = null;
-  showGuide = true;
-  document.getElementById('bestBadge').style.display = 'none';
-  document.getElementById('btnGuide').textContent = '👁️ Amagar guia';
-  showScreen('screenWelcome');
-}
+function tryAgain(){showScreen('screenPlay');startPlayLoop();}
+function recalibrate(){if(animId){cancelAnimationFrame(animId);animId=null;}bgData=null;showScreen('screenCalibrate');startCalibrationPreview();}
+function goHome(){stopCamera();bestScore=0;bgData=null;document.getElementById('bestBadge').style.display='none';showScreen('screenWelcome');}
 </script>
 </body>
 </html>
