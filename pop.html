@@ -99,7 +99,7 @@ h2{
   position:relative;border-radius:16px;overflow:hidden;
   box-shadow:0 8px 40px rgba(0,0,0,.5),0 0 60px rgba(0,180,216,.1);
   border:2px solid rgba(0,180,216,.2);
-  max-width:600px;width:100%;margin-bottom:16px;
+  max-width:860px;width:100%;margin-bottom:16px;
 }
 .cam-wrap canvas{display:block;width:100%;height:auto}
 
@@ -231,7 +231,7 @@ h2{
     Assegureu-vos que <strong style="color:#ffd166">no hi hagi ningú</strong> davant la càmera.<br>
     Premeu el botó quan el fons estigui buit.
   </p>
-  <div class="cam-wrap" style="max-width:560px">
+  <div class="cam-wrap" style="max-width:860px">
     <canvas id="calCanvas" width="640" height="480"></canvas>
   </div>
   <div class="sens-block">
@@ -255,7 +255,6 @@ h2{
   </div>
   <div class="controls">
     <button class="btn btn-danger" id="btnCapture" onclick="capturePhoto()" style="animation:pulse 2s infinite">📸 Fer foto!</button>
-    <button class="btn btn-secondary" id="btnGuide" onclick="toggleGuide()">👁️ Amagar guia</button>
   </div>
   <div class="controls-sm">
     <button class="btn btn-secondary btn-sm" onclick="recalibrate()">🔄 Re-calibrar</button>
@@ -299,7 +298,7 @@ const CAM_W = 640, CAM_H = 480, MASK_W = 160, MASK_H = 120;
 
 // ——— State ———
 let stream = null, bgData = null, animId = null;
-let threshold = 32, showGuide = true, bestScore = 0;
+let threshold = 32, showGuide = false, bestScore = 0;
 let silhouetteMask = null, octopusMask = null;
 
 // ——— Elements ———
